@@ -1,0 +1,16 @@
+add contoller
+// change database if you want in appsettings.json
+PM> Add-Migration EmpMig
+PM> Script-Migration
+PM> Update-Database
+
+
+
+//to disable auto naming
+builder.Services.AddControllers().AddJsonOptions(options=>{ options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    options.JsonSerializerOptions.DictionaryKeyPolicy = null;
+});
+
+
+//to enable cors
+app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());

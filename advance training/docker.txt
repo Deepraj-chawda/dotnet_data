@@ -1,0 +1,42 @@
+
+
+1) docker login
+   //enter usename and password
+
+2)docker info
+
+3)docker images
+
+4)docker pull hello-world
+5)docker run -it --rm hello-world
+
+6)docker run hello-world
+
+
+
+//in app
+//generate image
+1) docker build -t userauth-image -f "F:\c sharp program\Ourapp\Ourapp\Dockerfile" .
+
+//to run
+docker run -it --rm userauth-image
+
+//push to hub docker
+1)docker login
+2)docker tag learningapp deeprajchawda/learningapp	
+3)docker push deeprajchawda/learningapp
+
+//play docker
+1)docker login
+2)docker pull deeprajchawda/learningapp
+2)
+docker run -it --rm deeprajchawda/learningapp
+
+//web api
+//after add docker then add one  line in docker file
+EXPOSE 80   //port number
+//to run
+docker run -p 59105:80 web-api
+
+//in browser
+localhost:59105/api/product

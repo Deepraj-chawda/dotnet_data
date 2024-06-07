@@ -1,0 +1,81 @@
+Sealed class :
+----------------------
+  sealed class SampleClass
+    {
+        public void SampleMethod()
+        {
+            Console.WriteLine("SampleClass Method Definition");
+        }
+        public int MinimumCheck(int a, int b, int c)
+        {
+            int min;
+            if (a < b)
+            {
+                if (a < c)
+                {
+                    min = a;
+                }
+                else
+                    min = c;
+            }
+            else
+                if (b < c)
+                    min = b;
+                else
+                    min = c;
+
+            return min;
+        }
+    }
+
+ //   class DemoClass : SampleClass //--Cannot inherit the sealed Class
+ //  {
+ // }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            SampleClass sobj = new SampleClass();
+            sobj.SampleMethod();
+            Console.WriteLine(sobj.MinimumCheck(10,20,30));
+            Console.WriteLine(sobj.MinimumCheck(90,90,96));
+            Console.WriteLine(sobj.MinimumCheck(92,93,90));
+            Console.ReadKey();
+        }
+    }
+}
+
+
+============================================================================================
+   class Class1
+    {
+        public virtual void Method1()
+        {
+            Console.WriteLine(  "Class1 method 1");
+        }
+    }
+    class Class2:Class1 { 
+    public void Method2()
+        {
+            Console.WriteLine(  "Method 2 from Class2");
+        }
+        public sealed override void Method1()
+        {
+            base.Method1();
+            Console.WriteLine(  "Definition for Method1 from class2");
+        }
+    }
+
+    class Class3 : Class2 {
+        //public override void Method1()
+        //{
+
+        //}
+        public void Method3()
+        {
+            Console.WriteLine(  "Method 3 from class3");
+        }
+    
+    }
+====================================================================================================

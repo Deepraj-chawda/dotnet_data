@@ -1,0 +1,529 @@
+-- create Db
+create database Hexaware_Dec_23
+
+--choose the current DB
+use Hexaware_Dec_23
+
+-- create Table 
+create table Employee
+(
+Employee_id int not null,
+Name varchar(20),
+Gender varchar(6),
+Salary money
+)
+
+--DDL ==>create,alter,drop ==> working on structure of the table
+--DML ==>insert, update,delete ==> working on data
+--DQL ==> select ==> Retriving Data
+--TCL ==> grant,revoke ==> Working on permission 
+
+insert into Employee values(201,'Abinav','Male',65000)
+
+
+select * from Employee
+insert into Employee (Name, Employee_id,Gender,Salary)
+values('Abinav',202,'Male',65000)
+
+update Employee set name='Tiji',Salary=66000 where Employee_id=202
+
+insert into Employee (Employee_id,Name,Gender) values (203,'Pritha','Female')
+
+insert into Employee values (204,'Akash','Male',null)
+
+select * from Employee where salary is null
+select * from Employee where salary is not null
+--Where ==> clause 
+--is null ==> operator
+
+--constraint
+1. primary key constraint == It does not allow Duplicate as well as null values
+
+2. foreign key 
+3.unique ==> will allow the null value once.
+4.not null
+5.default
+6. check Constraint
+
+
+create table Employee1
+(
+Employee_id int not null,
+Name varchar(20),
+Gender varchar(6),
+Salary money constraint chk_salary check(Salary between 20000 and 990000)
+)
+alter table Employee1 add  Location varchar(20) constraint chk_Location check 
+(Location in ('Chennai','Delhi','Mumbai'))
+
+insert into Employee1 values (1,'Haris','Male',21000)
+select * from Employee1
+
+update Employee1 set Location='Mumbai'
+
+-- how to generate Auto_incremented values for a particular column
+create table Emp (
+emp_id int primary key identity,
+Name varchar(20),
+gender varchar(10))
+
+insert into Emp (Name,gender) values ('yuvan','Male')
+insert into Emp (Name,gender) values 
+('Uma','Female'),
+('Tina','Female'),
+('Raj','Male'),
+('Ram','Male')
+
+insert into Emp values (123,'yuvan','Male') 
+
+select * from Emp
+
+drop table Emp
+create table Emp (
+emp_id int primary key identity(1001,1),
+Name varchar(20),
+gender varchar(10))
+
+
+set IDENTITY_INSERT Emp ON
+
+insert into Emp(emp_id,Name,gender) values (123,'yuvan','Male') 
+set IDENTITY_INSERT Emp OFF
+insert into Emp (Name,gender) values ('Muskan','Female')
+
+select * from Emp
+
+-- default Constraint 
+
+alter table Emp add Location varchar(30) constraint df_location default 'Delhi'
+
+insert into Emp (Name,gender) values ('Muskan','Female')
+insert into Emp values ('pramod','Male','Hyderabad')
+
+
+
+-- create Db
+create database Hexaware_Dec_23
+
+--choose the current DB
+use Hexaware_Dec_23
+
+-- create Table 
+create table Employee
+(
+Employee_id int not null,
+Name varchar(20),
+Gender varchar(6),
+Salary money
+)
+
+--DDL ==>create,alter,drop ==> working on structure of the table
+--DML ==>insert, update,delete ==> working on data
+--DQL ==> select ==> Retriving Data
+--TCL ==> grant,revoke ==> Working on permission 
+
+insert into Employee values(201,'Abinav','Male',65000)
+
+
+select * from Employee
+insert into Employee (Name, Employee_id,Gender,Salary)
+values('Abinav',202,'Male',65000)
+
+update Employee set name='Tiji',Salary=66000 where Employee_id=202
+
+insert into Employee (Employee_id,Name,Gender) values (203,'Pritha','Female')
+
+insert into Employee values (204,'Akash','Male',null)
+
+select * from Employee where salary is null
+select * from Employee where salary is not null
+--Where ==> clause 
+--is null ==> operator
+
+--constraint
+1. primary key constraint == It does not allow Duplicate as well as null values
+
+2. foreign key 
+3.unique ==> will allow the null value once.
+4.not null
+5.default
+6. check Constraint
+
+
+create table Employee1
+(
+Employee_id int not null,
+Name varchar(20),
+Gender varchar(6),
+Salary money constraint chk_salary check(Salary between 20000 and 990000)
+)
+alter table Employee1 add  Location varchar(20) constraint chk_Location check 
+(Location in ('Chennai','Delhi','Mumbai'))
+
+insert into Employee1 values (1,'Haris','Male',21000)
+select * from Employee1
+
+update Employee1 set Location='Mumbai'
+
+-- how to generate Auto_incremented values for a particular column
+create table Emp (
+emp_id int primary key identity,
+Name varchar(20),
+gender varchar(10))
+
+insert into Emp (Name,gender) values ('yuvan','Male')
+insert into Emp (Name,gender) values 
+('Uma','Female'),
+('Tina','Female'),
+('Raj','Male'),
+('Ram','Male')
+
+insert into Emp values (123,'yuvan','Male') 
+
+select * from Emp
+
+drop table Emp
+create table Emp (
+emp_id int primary key identity(1001,1),
+Name varchar(20),
+gender varchar(10))
+
+
+set IDENTITY_INSERT Emp ON
+
+insert into Emp(emp_id,Name,gender) values (123,'yuvan','Male') 
+set IDENTITY_INSERT Emp OFF
+insert into Emp (Name,gender) values ('Muskan','Female')
+
+select * from Emp
+
+-- default Constraint 
+
+alter table Emp add Location varchar(30) constraint df_location default 'Delhi'
+
+insert into Emp (Name,gender) values ('Muskan','Female')
+insert into Emp values ('pramod','Male','Hyderabad')
+
+
+-- Foreign Key Constraint 
+create table Department
+(
+Department_id int primary key identity(501,1),
+Name varchar(20),
+Head varchar(30))
+
+drop table Employee
+create table Employee
+(
+emp_id int primary key identity(1001,1),
+Name varchar(20),
+Gender varchar(10),
+Designation varchar(20),
+Salary money,
+Dept_id int 
+constraint fk_deptid foreign key References Department(Department_id)
+)
+
+set iDENTITY_insert Department ON
+insert into Department
+values 
+('Account','Keller'),
+('Scrum','Ron Bowersek'),
+('Software Delivery','Nitin Nayyar')
+
+select * from Department
+
+
+ insert into Employee 
+ values 
+ ('Bhumika','female','Asso.Developer',23000,503),
+  ('Triveni','female','Asso.trainee',24000,501)
+  select * from Employee
+
+  insert into Employee 
+ values 
+  ('Sneha','female','Asso.Developer',25000,505) -- error DEpt_id conflict
+
+   insert into Employee 
+ values 
+ ('shristy','female','Developer',23000,503),
+  ('Srinithi','female','trainee',24000,501)
+
+
+delete from Department where Department_id=501 -- error Child table(employee) belongs to this id so we can't delete
+
+
+Drop Table employee
+
+select * from Department
+
+set iDENTITY_insert Department ON
+insert into Department (Department_id,Name,Head)
+values 
+(501,'Account','Keller')
+
+select * from Department
+
+-- on delete cascade
+create table Employee
+(
+emp_id int primary key identity(1001,1),
+Name varchar(20),
+Gender varchar(10),
+Designation varchar(20),
+Salary money,
+Dept_id int 
+constraint fk_deptid foreign key References Department(Department_id) on delete cascade
+)
+
+insert into Employee 
+ values 
+ ('Bhumika','female','Asso.Developer',23000,503),
+  ('Triveni','female','Asso.trainee',24000,501)
+  select * from Employee
+
+  insert into Employee 
+ values 
+  ('Sneha','female','Asso.Developer',25000,505) -- error DEpt_id conflict
+
+   insert into Employee 
+ values 
+ ('shristy','female','Developer',23000,503),
+  ('Srinithi','female','trainee',24000,501)
+
+
+  select * from Department
+  select * from Employee
+
+  delete from Employee where Dept_id=505
+
+  delete from Department where Department_id=501
+
+  alter table Employee drop constraint fk_deptid
+
+  alter table Employee add constraint fk_deptid1 
+  foreign key(dept_id) References Department(Department_id) on delete cascade
+
+  sp_help  Employee
+
+
+
+  -- on delete set null
+
+  alter table employee drop constraint fk_deptid1
+
+  alter table Employee add constraint fk_deptid1 
+  foreign key(dept_id) References Department(Department_id) on delete set null
+
+    delete from Department where Department_id=501
+
+	select * from Department
+	select * from Employee
+
+	select scope_IDentity()
+	select @@IDENTITY
+	select IDENT_CURRENT('Employee')
+	select IDENT_CURRENT('Department')
+
+
+	-- Joins 
+
+	1.Inner ==> Based on the condition it will return only matched rows from both the table
+	2.Left outer join (or) left join ==> It will return all rows from left side table matched rows from right side table
+	3.right outer ==>It will return all rows from right side table matched rows from left side table
+	4.full Join ==> All rows from both the tables
+	5.cross ==>cartesian product
+
+
+
+	create table tblDepartment
+	(Id int primary key identity,
+	DepartmentName varchar(20),
+	Location varchar(30),
+	Head varchar(30))
+
+
+	create table tblemployee
+	(Id int primary key Identity(201,1),
+	Name varchar(30),Gender varchar(10),
+	Salary money,
+	Dept_id int foreign key references tblDepartment(id)
+	)
+
+
+	insert into tblDepartment values
+	('It','London','Rick'),
+	('Payroll','Delhi','Ron'),
+	('HR','USA','Christie'),
+	('other','Sydney','cindrella')
+
+	select * from tblDepartment
+	select * from tblemployee
+
+	-- inner Join
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee
+	inner join
+	tblDepartment
+	ON tblemployee.Dept_id=tblDepartment.Id
+
+	--(or)
+   select Name,Gender,salary ,DepartmentName 
+	from tblemployee
+	 join
+	tblDepartment
+	ON tblemployee.Dept_id=tblDepartment.Id
+
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee e 
+	 join
+	tblDepartment d
+	ON e.Dept_id=d.Id
+
+	--Left Join
+	select * from tblDepartment
+	select * from tblemployee
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee e 
+	 left join
+	tblDepartment d
+	ON e.Dept_id=d.Id
+
+		--right Join
+	select * from tblDepartment
+	select * from tblemployee
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee e 
+	 right join
+	tblDepartment d
+	ON e.Dept_id=d.Id
+
+		--full Join
+	select * from tblDepartment
+	select * from tblemployee
+
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee e 
+	 full join
+	tblDepartment d
+	ON e.Dept_id=d.Id
+
+	--cross join
+
+	select * from tblDepartment
+	select * from tblemployee
+	select Name,Gender,salary ,DepartmentName 
+	from tblemployee e 
+	 cross join
+	tblDepartment d
+
+
+	--self join
+	create table EmployeeDemo
+	(
+	EmployeeId int primary key ,
+	Name varchar(20),
+	ManagerId int)
+
+	insert into EmployeeDemo 
+	values
+	(1,'Micheal',3),
+	(2,'Ron',1),
+	(3,'Todd',NULL),
+	(4,'Ben',1),
+	(5,'Sam',1)
+
+	select * from EmployeeDemo
+
+	select e.Name as Employee, m.Name as Manager
+	from EmployeeDemo e
+	join
+	EmployeeDemo m
+	on e.ManagerId=m.EmployeeId
+
+/*
+	--subquery 
+	Query within query is called as subquery
+
+	1.subquery ==> inner will execute first and inner query output will be acting as input to the outer query.
+	inner query can execute independently
+	2.correlated subquery ==> inner query does not execute seperately. It is relying on outer query
+
+	*/
+
+
+	create table tblProducts
+	(
+	Id int identity primary key,
+	Name varchar(50),
+	Description varchar(max)
+	)
+
+	create table tblProductSales
+	(
+	Id int primary key identity,
+	ProductId int foreign key references tblProducts(Id),
+	UnitPrice int,
+	QuantitySold int)
+
+
+	insert into tblProducts
+	values
+	('TV','93 inch LED Smart TV'),
+	('Laptop','16 GB Ram with 256 SSD touch screen '),
+	('ipad Air', '64GB with Calling Option')
+
+	 insert into tblProductSales values
+	 (3,65000,5),
+	 (2,98000,7),
+	 (3,65000,2),
+	 (3,65000,1)
+
+	 select * from tblProducts
+	 select * from tblProductSales
+	 --example for subquery
+	 select Id,Name,Description  from tblProducts
+	 where Id not in 
+	 (select Distinct ProductId from tblProductSales)
+
+	 /*
+	 -- assignment 
+	  1) try to get same output as above query using Joins
+	  2) write a query to retrive the name and totalquantity sold using subquery and join
+
+	  
+
+
+	  --correlated subquery
+
+	  if the subquery depends on the outer query for its value(s), then that subquery is called as correlated subquery
+	  */
+
+	  select Name, 
+	 ( select sum(quantitySold) from tblProductSales  where ProductId=tblProducts.Id) 
+	  as TotalQuantity
+	  from tblProducts order by Name
+
+	  create table tblDateTime
+	  (
+	  c_time time(7) null,
+	  c_date date null,
+	  c_smalldatetime smalldatetime,
+	  c_datetime datetime,
+	  c_datetime2 datetime2,
+	  c_datetimeoffset datetimeoffset)
+
+
+	  insert into tblDateTime values
+	  (GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE(),GETDATE())
+
+	
+
+	  select * from tblDateTime
+
+	    isDate()
+
+	  select ISDATE('Geetha')
+	  select ISDATE('2023-12-26 14:56')
+
+	  

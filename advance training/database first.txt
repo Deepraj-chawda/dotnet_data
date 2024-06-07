@@ -1,0 +1,22 @@
+Scaffold-DbContext "server=DEEPRAJ;database=BookStoreDb;trusted_connection=true;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+
+//add ConnectionStrings in appsettings.json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+//this line added
+  "ConnectionStrings": { "BookConstr": "server=DEEPRAJ;database=BookStoreDb;trusted_connection=true;" },
+  "AllowedHosts": "*"
+}
+
+//add this line in program.css (main class of project)
+ builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookConstr")));
+  
+// add contoller for each model (class or table)
+ select model and dbcontext class (do not add new context class)
+repeat for all model(class)

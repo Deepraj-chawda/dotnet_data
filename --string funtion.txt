@@ -1,0 +1,115 @@
+--string funtion
+--built in string function
+select ASCII('A')
+select ASCII('B')
+
+select Lower('HELLO')
+select Upper('hello')
+select LTRIM('    hello')
+select len('    hello')
+select len( LTRIM('    hello'))
+select len('hello   ')
+select len(RTRIM('hello   '))
+select REVERSE('Common')
+
+select * from tblproducts
+select Name, substring(name,1,1) as initial,
+SUBSTRING(description,4,10) as Description
+from tblProducts
+
+select RIGHT('First Name',2)
+
+select replace('abcdefghijaklmn','cde','zzz')
+
+select SUBSTRING('hello welcome',7,3)
+
+select substring ('hello',1,1)
+
+select PATINDEX('%ter%','interesting data')
+
+
+--user defined function
+declare @Number int 
+set @Number=65
+while(@Number<=90)
+BEGIN
+Print LOWER(CHAR(@Number))
+set @Number=@Number+1
+END
+
+
+int num;				declare @num int;
+num=1 ;					set @num=1
+while(num<255)			while(@num<255)  
+{						BEGIN
+printf(num);			print CHAR(@num)
+}						END
+ 
+
+ -- Mathmetical function
+ select ABS(-1.0)
+ select  ABS(4.6)
+ select ABS(4.1)
+
+ select CEILING(-1.0)
+ select  CEILING(4.6)
+ select CEILING(4.1)
+ select CEILING(4.0)
+
+  select FLOOR(-1.0)
+ select  FLOOR(4.6)
+ select FLOOR(4.1)
+ select FLOOR(4.0)
+
+ select ROUND(748.23,-1)
+ select ROUND(748.23,-2)
+  select ROUND(748.23,-3)
+
+  select SQRT(3)
+
+  select POWER(5,2)
+
+  select PI()
+
+  select RAND(100),RAND()
+  select LOG(EXP (100))
+
+  select RADIANS(1e-452)
+
+  select TAN(PI()/2)
+    select SIN(PI()/2)
+    select COS(PI()/2)
+
+	select DEGREES(32)
+	/*
+	-- stored procedure 
+	it is group of T-SQL statements. 
+	pre compiled query. it will compile only once and we can execute as many as time we need.
+	*/
+
+	-- example for stored procedure without any parameter
+	create procedure spGetAllEmployees
+	as
+	BEGIN
+	select * from tblemployee
+	END
+
+	exec spGetAllEmployees
+	execute spGetAllEmployees
+	spGetAllEmployees
+
+
+	-- example for stored procedure with input parameter
+	alter procedure spGetAllEmployeesByGender(@gender varchar(10),@deptid int)
+	as
+	BEGIN
+	select * from tblemployee where gender=@gender and dept_id=@deptid
+	END
+
+	exec spGetAllEmployeesByGender 'female',3
+	execute spGetAllEmployeesByGender @gender ='Male'
+	spGetAllEmployeesByGender
+
+		exec spGetAllEmployeesByGender @deptid=2,@gender='male'
+	execute spGetAllEmployeesByGender @gender ='Male'
+	spGetAllEmployeesByGender

@@ -1,0 +1,188 @@
+ArrayList Demo:
+------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CollectionsDemo
+{
+    internal class ArrayListDemo
+    {
+        static void Main(string[] args)
+        {
+            ArrayList arrayList = new ArrayList();
+            arrayList.Add(123);
+            arrayList.Add('p');
+            arrayList.Add("Geetha");
+            arrayList.Add(564.35);
+            Console.WriteLine(arrayList[3] );
+            Console.WriteLine("List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine( item );
+            }
+            
+            Console.WriteLine("\n\n Total Count of item in arraylist" + arrayList.Count);
+            
+           arrayList.Insert(2,"Hexaware");
+            Console.WriteLine("\n\n after inserted value in the index of2 \n List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+            arrayList.Remove('p');
+            Console.WriteLine("\n\n after Removed  p from arrayList  \n List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+
+            int[] integerArray = { 30, 40, 50, 60 };
+            arrayList.InsertRange(0,integerArray);
+            Console.WriteLine("\n\n after inserted integerarray in the arrayList  \n List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+            arrayList.RemoveRange(0, 3);
+            Console.WriteLine("\n\n after Removed 3 values from oth index  \n List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+            arrayList.RemoveAt(3);
+            Console.WriteLine("\n\n after RemovedAt(3)  \n List of item in array Lists are");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine(  "\n\nCount "+arrayList.Count);
+            Console.WriteLine(" Heaxware is available or not  "+ arrayList.Contains("Hexaware") );
+        }
+    }
+}
+=============================================================================================================================
+Stack 
+-----------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace CollectionsDemo
+{
+    internal class StackDemo
+    {
+        static void Main(string[] args)
+        {
+            Stack stack = new Stack();
+            stack.Push("Tina");
+            stack.Push("Riya");
+            stack.Push(544);
+            stack.Push('T');
+            foreach (var item in stack)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n\n Count "+ stack.Count );
+
+            stack.Pop();
+            Console.WriteLine("\n\nAfter Pop items in stack are");
+            foreach (var item in stack)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n\n Count " + stack.Count);
+            Console.WriteLine("\n\n Tina is availabnle or not"+stack.Contains("Tina"));
+        }
+    }
+}
+==============================================================================================================================
+Queue
+----------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+namespace CollectionsDemo
+{
+    internal class QueueDemo
+    {
+        static void Main(string[] args)
+        {
+            Queue queue = new Queue();
+            queue.Enqueue(10);
+            queue.Enqueue("PETER");
+            queue.Enqueue("yash");
+            Console.WriteLine("\n\n Items in queue are");
+            foreach (var item in queue)
+            {
+                Console.WriteLine( item);
+            }
+
+            Console.WriteLine("\n\n Count "+queue.Count);
+            queue.Dequeue();
+            Console.WriteLine("\n\n after Items Removed from the  queue are");
+            foreach (var item in queue)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n\n Count " + queue.Count);
+
+        }
+    }
+        
+}
+=========================================================================================================
+Hashtable 
+--------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+namespace CollectionsDemo
+{
+    internal class HashTableDemo
+    {
+        static void Main(string[] args)
+        {
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("001", "Web Technologies");
+            hashtable.Add("002", "Data WareHousing");
+            hashtable.Add(3, "Mobile application");
+            Console.WriteLine( "\n\n Keys in HashTable" );
+            foreach (var item in hashtable.Keys) {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n\n Values in HashTable");
+            foreach (var item in hashtable.Values) {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n\n Key and values  in HashTable");
+            foreach (DictionaryEntry item in hashtable)
+            {
+               
+                Console.WriteLine(item.Key + "\t "+item.Value);
+            }
+
+            hashtable["sam"] = "Manager";
+            hashtable[3] = "Developer";
+            Console.WriteLine("\n\n Key and values  in HashTable");
+            foreach (DictionaryEntry item in hashtable)
+            {
+
+                Console.WriteLine(item.Key + "\t " + item.Value);
+            }
+        }
+    }
+}
+==============================================================================================================================================

@@ -1,0 +1,14 @@
+ng new second-app or //ng new exercise-app --no-standalone
+//select css 
+//select n
+ng build
+ng serve -o
+
+//add new component
+ng g c student 
+
+//pipe create
+ng g p sqr --skip-tests
+
+//create service
+ng g s welcome

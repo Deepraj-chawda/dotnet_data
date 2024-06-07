@@ -1,0 +1,72 @@
+1)install JwtBearer
+
+2)//add in appsettings.json
+// add this lines
+  "Jwt": {
+    "Issuer": "Issuer",
+    "Audience": "Audience",
+    "Key": "0c8d782fb4bf1ba674942043b7e8e5ff"  //(hashtools)
+  },
+  "AllowedHosts": "*"
+
+
+3)//add in program.cs
+builder.Services.AddAuthentication(
+    options=> {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme; 
+        options.DefaultScheme=JwtBearerDefaults.AuthenticationScheme;
+    
+        }
+    ).AddJwtBearer(
+    
+    o=>o.TokenValidationParameters=new TokenValidationParameters
+    { ValidIssuer = builder.Configuration["Jwt:Issuer"],
+    ValidAudience = builder.Configuration["Jwt:Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+    ValidateIssuer=true, 
+    ValidateAudience=true,
+    ValidateLifetime=false,
+    ValidateIssuerSigningKey = true
+    });
+
+builder.Services.AddAuthentication();
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).AddEnvironmentVariables();
+
+app.UseAuthentication();
+app.UseAuthorization();
+IConfiguration configuration = app.Configuration;
+IWebHostEnvironment environment = app.Environment;
+app.MapControllers();
+
+
+4)//generate token
+
+var issuer = _config["Jwt:Issuer"];
+var audience = _config["Jwt:Audience"];
+var key = Encoding.UTF8.GetBytes(_config["Jwt:key"]);
+var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+var subject = new ClaimsIdentity(
+    new[]
+    {
+        new Claim(JwtRegisteredClaimNames.Sub,user.Username),
+        new Claim(JwtRegisteredClaimNames.Email,user.Username)
+    });
+var expires = DateTime.UtcNow.AddMinutes(10);
+var tokenDescription = new SecurityTokenDescriptor
+{
+    Subject = subject,
+    SigningCredentials = signingCredentials,
+    Expires = expires,
+    Issuer = issuer,
+    Audience = audience
+};
+var tokenHandler = new JwtSecurityTokenHandler();
+var token = tokenHandler.CreateToken(tokenDescription);
+var jwtToken = tokenHandler.WriteToken(token);
+return Ok(jwtToken);
+
+
+
+5)//add Authorize on top of api (get post etc)
+  [Authorize]
