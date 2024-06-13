@@ -12,3 +12,6 @@ ng g p sqr --skip-tests
 
 //create service
 ng g s welcome
+
+//model class
+ng g class name --type=model
